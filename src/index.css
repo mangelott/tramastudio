@@ -3,16 +3,19 @@
 @import '@fontsource/newsreader/400.css';
 @import '@fontsource-variable/manrope/wght.css';
 
-/* Cores e fontes da identidade Trama Studio (guia de marca, 08_Cores). */
+/* Cores e fontes da identidade Trama Studio (guia de marca v1.1, 08_Cores). */
 @theme {
   --color-bronze: #b0865a;
   --color-bronze-esc: #7e5e3b;
   --color-algodao: #faf7f2;
-  --color-linho: #f1e9de;
+  --color-linho: #ede5d8;
   --color-areia: #d9c7af;
-  --color-tinta: #2e2a26;
-  --color-cinza: #5a534b;
-  --color-cinza-claro: #9a9187;
+  --color-tinta: #221f1b;
+  --color-nogueira: #4a3727;
+  --color-salva: #8b8d77;
+  /* Texto secundário: contraste ≥ 4,5:1 sobre Algodão e branco. */
+  --color-cinza: #62574b;
+  --color-cinza-claro: #7a6f62;
   --color-erro: #a3402f;
   --color-ok: #4f7a4a;
 
@@ -46,15 +49,30 @@
     @apply inline-flex min-h-12 items-center justify-center rounded-lg border border-erro/40 bg-white px-5 text-[15px] font-semibold text-erro;
   }
   .campo {
-    @apply block w-full min-h-12 rounded-lg border border-areia bg-white px-4 text-[16px] text-tinta outline-none placeholder:text-cinza-claro focus:border-bronze focus:ring-2 focus:ring-bronze/20;
+    @apply block w-full min-h-[52px] rounded-xl border-[1.5px] border-areia bg-white px-4 text-[17px] text-tinta outline-none placeholder:text-cinza-claro focus:border-bronze focus:ring-2 focus:ring-bronze/20;
   }
   .rotulo {
-    @apply mb-1.5 block text-[12px] font-bold uppercase tracking-[.1em] text-cinza;
+    @apply mb-2 block text-[13px] font-semibold text-cinza;
   }
   .cartao {
-    @apply rounded-xl border border-linho bg-white p-5;
+    @apply rounded-2xl border border-areia bg-white p-6;
+  }
+  .btn-grande {
+    @apply inline-flex min-h-14 items-center justify-center gap-2.5 rounded-xl bg-tinta px-7 text-[16px] font-semibold text-algodao transition active:scale-[.98] disabled:opacity-40;
+  }
+  .btn-grande-sec {
+    @apply inline-flex min-h-14 items-center justify-center gap-2.5 rounded-xl border-[1.5px] border-areia bg-white px-6 text-[16px] font-semibold text-tinta transition active:scale-[.98] disabled:opacity-40;
+  }
+  .titulo-serif {
+    @apply font-serif font-light tracking-[-0.01em];
+  }
+  .trama {
+    background-color: var(--color-tinta);
+    background-image:
+      repeating-linear-gradient(0deg, rgb(176 134 90 / 0.09) 0 2px, transparent 2px 12px),
+      repeating-linear-gradient(90deg, rgb(176 134 90 / 0.09) 0 2px, transparent 2px 12px);
   }
   .sobrancelha {
-    @apply text-[11px] font-bold uppercase tracking-[.16em] text-bronze-esc;
+    @apply font-sans text-[11px] font-bold uppercase tracking-[.16em] text-bronze-esc;
   }
 }

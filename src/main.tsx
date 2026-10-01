@@ -4,10 +4,15 @@ import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-rou
 import { SessaoProvider } from './auth/Sessao'
 import { Requer } from './auth/Requer'
 import { Login, DefinirPalavraPasse } from './paginas/Login'
-import { LayoutCampo } from './paginas/app/LayoutCampo'
+import { LayoutCampo, Pagina } from './paginas/app/LayoutCampo'
 import { Hoje } from './paginas/app/Hoje'
 import { Clientes, FichaCliente } from './paginas/app/Clientes'
 import { Calculadora } from './paginas/app/Calculadora'
+import { NovaVisita, Visitas } from './paginas/app/visita/Visitas'
+import { LayoutVisita } from './paginas/app/visita/LayoutVisita'
+import { Obra } from './paginas/app/visita/Obra'
+import { Janelas } from './paginas/app/visita/Janelas'
+import { Confecao } from './paginas/app/visita/Confecao'
 import './index.css'
 
 // O backoffice só é usado pelo gestor: carrega em separado da app de campo.
@@ -23,10 +28,23 @@ const router = createBrowserRouter([
     element: <Requer><LayoutCampo /></Requer>,
     children: [
       { index: true, element: <Hoje /> },
-      { path: 'clientes', element: <Clientes /> },
-      { path: 'clientes/novo', element: <FichaCliente key="novo" /> },
-      { path: 'clientes/:id', element: <FichaCliente /> },
-      { path: 'calculadora', element: <Calculadora /> },
+      { path: 'clientes', element: <Pagina><Clientes /></Pagina> },
+      { path: 'clientes/novo', element: <Pagina><FichaCliente key="novo" /></Pagina> },
+      { path: 'clientes/:id', element: <Pagina><FichaCliente /></Pagina> },
+      { path: 'calculadora', element: <Pagina larga><Calculadora /></Pagina> },
+      { path: 'visitas', element: <Visitas /> },
+      { path: 'visitas/nova', element: <NovaVisita /> },
+      {
+        path: 'visitas/:id',
+        element: <LayoutVisita />,
+        children: [
+          { index: true, element: <Navigate to="obra" replace /> },
+          { path: 'obra', element: <Obra /> },
+          { path: 'janelas', element: <Janelas /> },
+          { path: 'janelas/:janelaId', element: <Janelas /> },
+          { path: 'janelas/:janelaId/confecao', element: <Confecao /> },
+        ],
+      },
     ],
   },
   {

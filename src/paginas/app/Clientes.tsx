@@ -135,6 +135,9 @@ export function FichaCliente() {
       <div className="mt-6 flex gap-3">
         <button className="btn">Guardar</button>
         <Link to="/app/clientes" className="btn-sec">Cancelar</Link>
+        {!novo && id && (
+          <Link to={`/app/visitas/nova?cliente=${id}`} className="btn-sec ml-auto">Marcar visita</Link>
+        )}
       </div>
     </form>
   )

@@ -26,6 +26,7 @@ src/paginas/admin/     Backoffice (só gestor)
 1. **SQL Editor** → colar e executar, por esta ordem:
    - `supabase/migrations/20261001000000_esquema_inicial.sql`
    - `supabase/migrations/20261001000100_storage.sql`
+   - `supabase/migrations/20261002000000_visita_obra_e_janelas.sql` (fase 2: dados da obra e escolhas por janela)
 2. **Authentication → Sign In / Providers → Email**: desligar *Allow new users to sign up*. Só entra quem for convidado.
 3. **Authentication → Users → Add user → Create new user** com o teu email, uma palavra-passe e *Auto Confirm User* ligado. **O primeiro utilizador criado fica gestor**; os seguintes ficam técnicos.
 4. **Authentication → URL Configuration**:

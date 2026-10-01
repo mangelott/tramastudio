@@ -91,30 +91,51 @@ function useOnline() {
   return online
 }
 
-/** Indicador de rede e de alterações por enviar. Toque para sincronizar. */
-export function EstadoSync() {
+/** Estado da rede e da fila de envio, partilhado pelos indicadores de sincronização. */
+export function useEstadoSync() {
   const online = useOnline()
   const pendentes = useLiveQuery(() => db.pendentes.count(), [], 0)
   const comErro = useLiveQuery(() => db.pendentes.filter((p) => Boolean(p.erro)).count(), [], 0)
   const [aSincronizar, setASincronizar] = useState(false)
 
-  const cor = !online ? 'bg-cinza-claro' : comErro ? 'bg-erro' : pendentes ? 'bg-bronze' : 'bg-ok'
+  const cor = !online ? 'bg-cinza-claro' : comErro ? 'bg-erro' : pendentes ? 'bg-bronze' : 'bg-salva'
   const texto = !online
     ? pendentes ? `Offline · ${pendentes} por enviar` : 'Offline'
     : comErro ? `${comErro} com erro` : pendentes ? `${pendentes} por enviar` : 'Sincronizado'
 
+  async function sincronizarAgora() {
+    setASincronizar(true)
+    await sincronizar()
+    setASincronizar(false)
+  }
+  return { online, pendentes, comErro, cor, texto, aSincronizar, sincronizarAgora }
+}
+
+/** Indicador de rede e de alterações por enviar. Toque para sincronizar. */
+export function EstadoSync() {
+  const { cor, texto, aSincronizar, sincronizarAgora } = useEstadoSync()
   return (
     <button
       className="flex min-h-10 items-center gap-2 rounded-full border border-linho bg-white px-3 text-[13px] font-semibold text-cinza"
-      onClick={async () => {
-        setASincronizar(true)
-        await sincronizar()
-        setASincronizar(false)
-      }}
+      onClick={sincronizarAgora}
       title="Sincronizar agora"
     >
       <span className={`size-2.5 rounded-full ${cor} ${aSincronizar ? 'animate-pulse' : ''}`} />
       {aSincronizar ? 'A sincronizar…' : texto}
     </button>
+  )
+}
+
+/** Linha discreta com o estado de gravação, para a barra de ações da visita. */
+export function EstadoGravacao() {
+  const { online, pendentes, cor } = useEstadoSync()
+  const texto = pendentes
+    ? online ? 'Guardado neste iPad · a enviar' : 'Guardado neste iPad · envia quando houver rede'
+    : 'Guardado e sincronizado'
+  return (
+    <span className="hidden items-center gap-2 text-[13px] font-semibold text-cinza md:flex">
+      <span className={`size-2 rounded-full ${cor}`} />
+      {texto}
+    </span>
   )
 }

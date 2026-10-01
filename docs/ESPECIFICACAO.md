@@ -129,8 +129,8 @@ O total soma as janelas, aplica o desconto e o IVA (23 %). O backoffice avisa qu
 
 ## 9. Fases
 
-1. **Base**: login, perfis, esquema e permissões, clientes, catálogo no backoffice, motor de cálculo. ← *esta entrega*
-2. **Visita**: janelas, fotografias, cálculo por janela, offline completo.
+1. **Base**: login, perfis, esquema e permissões, clientes, catálogo no backoffice, motor de cálculo. ✔
+2. **Visita**: marcar visita, dados da obra, janelas por divisão com teclado numérico, fotografias, confeção e tecido com cálculo por janela, tudo offline. ✔ *(outubro 2026)*
 3. **Orçamento e assinatura**: PDF com a marca, assinatura, registo de prova, RGPD e consentimentos, envio por email.
 4. **Gestão**: painel de métricas, documentos, gestão de utilizadores na app.
 5. **Depois**: faturação (InvoiceXpress/Moloni), encomendas a fornecedores, agenda, estores.
