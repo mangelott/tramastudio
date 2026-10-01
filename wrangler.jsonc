@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers (static assets): serve a app compilada em dist/.
+  // As rotas da app (/app, /admin, …) caem no index.html (single-page application).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tramastudio",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
